@@ -1,11 +1,11 @@
-# Oy Client 
-[![Build Status](https://github.com/vousmeevoyez/oy-client/workflows/Python%20Pipeline/badge.svg)](https://github.com/vousmeevoyez/oy-client/workflows/Python%20Pipeline/badge.svg)
-[![codecov](https://codecov.io/gh/vousmeevoyez/oy-client/branch/master/graph/badge.svg)](https://codecov.io/gh/vousmeevoyez/oy-client)
-[![Stable Version](https://img.shields.io/github/v/tag/vousmeevoyez/oy-client)](https://img.shields.io/github/v/tag/vousmeevoyez/oy-client)
+# Sepulsa Client 
+[![Build Status](https://github.com/vousmeevoyez/sepulsa/workflows/Python%20Pipeline/badge.svg)](https://github.com/vousmeevoyez/sepulsa/workflows/Python%20Pipeline/badge.svg)
+[![codecov](https://codecov.io/gh/vousmeevoyez/sepulsa/branch/master/graph/badge.svg)](https://codecov.io/gh/vousmeevoyez/sepulsa)
+[![Stable Version](https://img.shields.io/github/v/tag/vousmeevoyez/sepulsa)](https://img.shields.io/github/v/tag/vousmeevoyez/sepulsa)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 
-Unofficial Oy Client using Python 
-https://api-docs.oyindonesia.com/
+Unofficial Sepulsa Client using Python 
+https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/
 
 ### Prerequisites
 	These library only tested for python 3.7 but it should be compatible to other python version
@@ -13,7 +13,7 @@ https://api-docs.oyindonesia.com/
 
 ### Installing
 ```
-	pip3 install oy-client
+pip3 install sepulsa
 ```
 ### Quick Start
 ```

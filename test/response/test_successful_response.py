@@ -14,6 +14,7 @@ def check_response(mock_http_response):
     return response
 
 
+'''
 def test_get_product_list_response(setup_http_response,
                                    generate_sepulsa_response, assert_list):
     """ simulate success get product list response from sepulsa """
@@ -22,6 +23,7 @@ def test_get_product_list_response(setup_http_response,
 
     response = check_response(mock_http_response)
     assert_list(response)
+'''
 
 
 def test_get_balance_response(setup_http_response, generate_sepulsa_response):
