@@ -5,29 +5,37 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 
 Unofficial Sepulsa Client using Python 
-https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/
 
-### Prerequisites
-	These library only tested for python 3.7 but it should be compatible to other python version
-	please create issue or contact me if you want to test it on python2
+**This library allows you to quickly and easily use the SendGrid Web API v3 via Python.**
 
-### Installing
+These library only tested for python 3.7 but it should be compatible to other python version
+please create issue or contact me if you want to test it on python2
+
+reference: https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/
+
+# Table of Contents
+
+* [Installation](#installation)
+* [Quick Start](#quick-start)
+
+
+# installation
+
+### Installation
 ```
 pip3 install sepulsa
 ```
 ### Quick Start
 ```
-from oy import build_client
+from sepulsa import build_client
 
 # get balance
-oy_client = build_client("https://sandbox.oyindonesia.com/staging/partner", "username", "api-key")
-oy_client.get_balance()
+sepulsa = build_client("https://horven-api.sumpahpalapa.com/api", "username", "api-key")
+sepulsa.get_products()
 
-# inquiry account
-oy_client.inquiry_account("014", "1234561234")
+more example checkout:
+- [Example Code](https://github.com/vousmeevoyez/sepulsa/tree/master/examples)
 
-# disburse
-disburse("014", "123456789", 100000)
 ```
 
 ## Built With

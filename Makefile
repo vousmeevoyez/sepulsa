@@ -1,11 +1,11 @@
 clean: 
 	find . -name \*.pyc -delete
-	rm -rf build dist oy_client.egg-info
+	rm -rf build dist sepulsa_client.egg-info
 
 publish-staging:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/* --verbose
 
-build:
+build-package:
 	python setup.py sdist bdist_wheel
 
 publish:
@@ -15,13 +15,13 @@ check-coverage:
 	pytest --cov=./ --cov-report=xml
 
 check-cc:
-	radon cc oy --total-average -s 
+	radon cc sepulsa --total-average -s 
 
 check-mi:
-	radon mi oy -s
+	radon mi sepulsa -s
 
 check-raw:
-	radon raw oy -s
+	radon raw sepulsa -s
 
 check-hal:
-	radon hal oy -f
+	radon hal sepulsa -f
