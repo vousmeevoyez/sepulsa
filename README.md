@@ -7,6 +7,16 @@
 Unofficial Sepulsa Client using Python 
 
 **This library allows you to quickly and easily use the Sepulsa v3 via Python.**
+List of implemented API:
+* Pulsa Prabayar
+* Pulsa Pascabayar
+* Paket Data
+* PLN Prabayar
+* PLN Pascabayar
+* BPJS Kesehatan
+* PDAM
+* Telkom
+
 reference: https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/
 
 # Table of Contents
