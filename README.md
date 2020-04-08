@@ -36,11 +36,10 @@ from sepulsa import build_client
 # get balance
 sepulsa = build_client("https://horven-api.sumpahpalapa.com/api", "username", "api-key")
 sepulsa.get_products()
-
+```
 more example checkout:
 - [Example Code](https://github.com/vousmeevoyez/sepulsa/tree/master/examples)
 
-```
 
 ## Built With
 
