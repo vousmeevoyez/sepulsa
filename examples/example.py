@@ -1,43 +1,70 @@
 """
-    Example how to use Oy-Client
+    sepulsa python client examples
 """
-from oy import build_client
+import uuid
+from sepulsa import build_client
 
-# initialize client
-base_url = "https://sandbox.oyindonesia.com/staging/partner"
-CLIENT = build_client(base_url, "username", "password")
+USERNAME = "sepulsausername"
+PASSWORD = "sepulsapassword"
+BASE_URL = "https://horven-api.sumpahpalapa.com/api"
 
-# get bank account information
-response = CLIENT.inquiry_account("014", "4740625654")
-print(response)
-
-# Send money to bank account
-base_url = "https://sandbox.oyindonesia.com/staging/partner"
-recipient_bank = "009"
-recipient_account = "1122334455"
-amount = 10000
-partner_trx_id = "some-unique-id"
-
-response = CLIENT.disburse(recipient_bank, recipient_account, amount, partner_trx_id)
-print(response)
-
-# get disbursement status
-reference_id = "some-reference-id"
-response = CLIENT.disburse_status(reference_id)
-print(response)
-
-# get master balance
-response = CLIENT.get_balance()
-print(response)
-
-# geneerate virtual account
-response = CLIENT.generate_va("002", 10000, "some-unqiue-id2")
-print(response)
-
-# generate list of generated virtual account
-response = CLIENT.get_list_of_va()
-print(response)
-
-# get virtual account details
-response = CLIENT.get_va_info("some-va-id")
-print(response)
+CLIENT = build_client(BASE_URL, USERNAME, PASSWORD)
+""" get real all products data from sepulsa """
+response = CLIENT.get_products()
+""" get create mobile prepaid from sepulsa """
+response = CLIENT.create_mobile_prepaid_transaction(
+    customer_number="081234567890", product_id=99, order_id=str(uuid.uuid4())
+)
+""" inquire bpjs kesehatan from sepulsa """
+response = CLIENT.inquire_bpjs_kesehatan(
+    customer_number="0000001430071801", product_id=34, payment_period="01"
+)
+""" get create bpjs kesehatan from sepulsa """
+response = CLIENT.create_bpjs_kesehatan_transaction(
+    customer_number="0000001430071801",
+    product_id=34,
+    payment_period="01",
+    order_id=str(uuid.uuid4()),
+)
+""" get inquire pln prepaid from sepulsa """
+response = CLIENT.inquire_pln_prepaid(customer_number="01428800700", product_id=25)
+""" create pln prepaid transaction from sepulsa """
+response = CLIENT.create_pln_prepaid_transaction(
+    customer_number="08123456789",
+    pln_meter_no="01428800700",
+    product_id=25,
+    order_id=str(uuid.uuid4()),
+)
+""" inquire pln postpaid from sepulsa """
+response = CLIENT.inquire_pln_postpaid(customer_number="512345610000", product_id=80)
+""" create pln postpaid from sepulsa """
+response = CLIENT.create_pln_postpaid_transaction(
+    customer_number="512345610000", product_id=80, order_id=str(uuid.uuid4())
+)
+""" inquire telkom bill from sepulsa """
+response = CLIENT.inquire_telkom_bill(customer_number="0218800007", product_id=82)
+""" create telkom bill transaction from sepulsa """
+response = CLIENT.create_telkom_bill_transaction(
+    customer_number="0218800007", product_id=82, order_id=str(uuid.uuid4())
+)
+""" get all pdam operators from sepulsa """
+response = CLIENT.get_pdam_operators(product_id=87)
+""" inquire pdam bills from sepulsa """
+response = CLIENT.inquire_pdam_bill(
+    customer_number="1998900001", product_id=87, operator_code="pdam_aetra"
+)
+""" create pdam bill transaction from sepulsa """
+response = CLIENT.create_pdam_bill_transaction(
+    customer_number="1998900001",
+    product_id=87,
+    operator_code="pdam_aetra",
+    order_id=str(uuid.uuid4()),
+)
+""" inquire mobile postpaid from sepulsa """
+response = CLIENT.inquire_mobile_postpaid(
+    customer_number="081234000001", product_id=113
+)
+""" create mobile postpaid from sepulsa """
+response = CLIENT.create_mobile_postpaid_transaction(
+    customer_number="081234000001", product_id=113, order_id=str(uuid.uuid4())
+)
