@@ -71,10 +71,10 @@ def test_get_xl_profile_subscriber_response(setup_http_response,
     assert response["end_cycle_date"]
 
 
-def test_inquiry_bpjs_kesehatan_response(setup_http_response,
+def test_inquire_bpjs_kesehatan_response(setup_http_response,
                                          generate_sepulsa_response,
                                          assert_bpjs_kesehatan):
-    """ simulate success inquiry bpjs kesehatan response from sepulsa """
+    """ simulate success inquire bpjs kesehatan response from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_BPJS_KESEHATAN")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -137,10 +137,10 @@ def test_bpjs_kesehatan_details_response(setup_http_response,
     assert_transaction_details(response, data_details)
 
 
-def test_inquiry_pln_prepaid_response(setup_http_response,
+def test_inquire_pln_prepaid_response(setup_http_response,
                                       generate_sepulsa_response,
                                       assert_inquire_pln_prepaid):
-    """ simulate success inquiry pln prepaid response from sepulsa """
+    """ simulate success inquire pln prepaid response from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_PLN_PREPAID")
 
@@ -210,11 +210,11 @@ def test_pln_prepaid_details_response(setup_http_response,
     assert_transaction_details(response, data_details)
 
 
-def test_inquiry_pln_postpaid_response(setup_http_response,
+def test_inquire_pln_postpaid_response(setup_http_response,
                                        generate_sepulsa_response,
                                        assert_inquire_pln_postpaid,
                                        assert_pln_postpaid_bills):
-    """ simulate success inquiry pln postpaid response from sepulsa """
+    """ simulate success inquire pln postpaid response from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_PLN_POSTPAID")
 
@@ -270,31 +270,15 @@ def test_pln_postpaid_details_response(setup_http_response,
     assert_pln_postpaid_bills(response["data"]["bills"])
 
 
-def test_inquiry_telkom_response(setup_http_response,
-                                 generate_sepulsa_response):
-    """ simulate success inquiry telkom response from sepulsa """
+def test_inquire_telkom_response(setup_http_response, generate_sepulsa_response,
+                                 assert_inquire_telkom_bill):
+    """ simulate success inquire telkom response from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_TELKOM")
     mock_http_response = setup_http_response(200, sepulsa_response)
 
     response = check_response(mock_http_response)
-    assert response["trx_id"] == ""
-    assert response["stan"]
-    assert response["datetime"]
-    assert response["code"] == ""
-    assert response["rc"]
-    assert response["product_type"]
-    assert response["produk"]
-    assert response["request_type"]
-    assert response["id_pelanggan"]
-    assert response["nama_pelanggan"]
-    assert response["no_reference"]
-    assert response["bulan_thn"]
-    assert response["jumlah_tagihan"]
-    assert response["jumlah_adm"]
-    assert response["jumlah_bayar"]
-    assert response["description"]
-    assert response["status"] is True
+    assert_inquire_telkom_bill(response)
 
 
 def test_create_telkom_trx_response(setup_http_response,
@@ -340,43 +324,27 @@ def test_telkom_details_response(setup_http_response, generate_sepulsa_response,
     assert_transaction_details(response, data_details)
 
 
-def test_inquiry_pdam_response(setup_http_response, generate_sepulsa_response,
-                               assert_pdam_bills):
-    """ simulate success get inquiry pdam from sepulsa """
+def test_pdam_operators(setup_http_response, generate_sepulsa_response,
+                        assert_pdam_operators):
+    """ simulate success get pdam operators from sepulsa """
+
+    sepulsa_response = generate_sepulsa_response("PDAM_OPERATOR")
+    mock_http_response = setup_http_response(200, sepulsa_response)
+
+    response = check_response(mock_http_response)
+    assert_pdam_operators(response)
+
+
+def test_inquire_pdam_response(setup_http_response, generate_sepulsa_response,
+                               assert_pdam_bills, assert_inquire_pdam):
+    """ simulate success get inquire pdam from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_PDAM")
     mock_http_response = setup_http_response(200, sepulsa_response)
 
     response = check_response(mock_http_response)
-    assert response["trx_id"] == ""
-    assert response["stan"]
-    assert response["amount"]
-    assert response["merchant_code"]
-    assert response["rc"]
-    assert response["admin_charge"]
-    assert response["local_trx_time"]
-    assert response["local_trx_date"]
-    assert response["settlement_date"]
-    assert response["acquiring_institution_id"]
-    assert response["retrieval_ref_no"]
-    assert response["idpel"]
-    assert response["blth"]
-    assert response["name"]
-    assert response["customer_address"]
-    assert response["group_code"]
-    assert response["group_desc"]
-    assert response["bill_count"]
-    assert response["bill_repeat_count"]
-    assert response["rp_tag"]
-    assert response["bills"]
-
+    assert_inquire_pdam(response)
     assert_pdam_bills(response["bills"])
-
-    assert response["mti"]
-    assert response["pan"]
-    assert response["processing_code"]
-    assert response["transmission_datetime"]
-    assert response["status"] is True
 
 
 def test_create_pdam_trx_response(setup_http_response,
@@ -433,10 +401,10 @@ def test_pdam_details_response(setup_http_response, generate_sepulsa_response,
     assert response["data"]["waktu_lunas"]
 
 
-def test_inquiry_multifinance_response(setup_http_response,
+def test_inquire_multifinance_response(setup_http_response,
                                        generate_sepulsa_response,
                                        assert_multifinance_details):
-    """ simulate success inquiry multifnance from sepulsa """
+    """ simulate success inquire multifnance from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_MULTIFINANCE")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -508,10 +476,10 @@ def test_game_voucher_details_response(setup_http_response,
     assert response["data"]["desc"]
 
 
-def test_inquiry_tv_bill_responose(setup_http_response,
+def test_inquire_tv_bill_responose(setup_http_response,
                                    generate_sepulsa_response,
                                    assert_tv_bill_details):
-    """ simulate success inquiry tv bill from sepulsa """
+    """ simulate success inquire tv bill from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_TV_BILL")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -546,10 +514,10 @@ def test_tv_bill_details_response(setup_http_response,
     assert_tv_bill_details(response["data"])
 
 
-def test_inquiry_mobile_postpaid_response(setup_http_response,
+def test_inquire_mobile_postpaid_response(setup_http_response,
                                           generate_sepulsa_response,
                                           assert_mobile_postpaid_details):
-    """ simulate success inquiry mobile postpaid from sepulsa """
+    """ simulate success inquire mobile postpaid from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_MOBILE_POSTPAID")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -639,8 +607,8 @@ def test_donation_details_response(setup_http_response,
     assert response["data"]["account_number"]
 
 
-def test_inquiry_bill_response(setup_http_response, generate_sepulsa_response):
-    """ simulate success inquiry bill from sepulsa """
+def test_inquire_bill_response(setup_http_response, generate_sepulsa_response):
+    """ simulate success inquire bill from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_BILL")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -677,10 +645,10 @@ def test_bill_details_response(setup_http_response, generate_sepulsa_response,
     assert_transaction_details(response)
 
 
-def test_inquiry_tv_prepaid_response(setup_http_response,
+def test_inquire_tv_prepaid_response(setup_http_response,
                                      generate_sepulsa_response,
                                      assert_tv_prepaid_details):
-    """ simulate success inquiry tv prepaid from sepulsa """
+    """ simulate success inquire tv prepaid from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_TV_PREPAID")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -752,10 +720,10 @@ def test_voucher_details_response(setup_http_response,
     assert response["data"]["desc"] == ""
 
 
-def test_education_inquiry_response(setup_http_response,
+def test_education_inquire_response(setup_http_response,
                                     generate_sepulsa_response,
                                     assert_education_details):
-    """ simulate success inquiry education  from sepulsa """
+    """ simulate success inquire education  from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_EDUCATION")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -795,9 +763,9 @@ def test_education_details_response(setup_http_response,
     assert_education_details(response["data"]["bills"])
 
 
-def test_inquiry_pbb_response(setup_http_response, generate_sepulsa_response,
+def test_inquire_pbb_response(setup_http_response, generate_sepulsa_response,
                               assert_pbb_details):
-    """ simulate success inquiry  pbb from sepulsa """
+    """ simulate success inquire  pbb from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_PBB")
     mock_http_response = setup_http_response(200, sepulsa_response)
@@ -840,7 +808,7 @@ def test_pbb_details_response(setup_http_response, generate_sepulsa_response,
     assert_pbb_details(response["data"])
 
 
-def test_inquiry_credit_card_response(setup_http_response,
+def test_inquire_credit_card_response(setup_http_response,
                                       generate_sepulsa_response):
     """ simulate success nquiry credit card from sepulsa """
 
@@ -889,9 +857,9 @@ def test_credit_card_details_response(setup_http_response,
     assert_transaction_details(response, data_details)
 
 
-def test_inquiry_pkb_response(setup_http_response, generate_sepulsa_response,
+def test_inquire_pkb_response(setup_http_response, generate_sepulsa_response,
                               assert_pkb_details):
-    """ simulate success inquiry pkb from sepulsa """
+    """ simulate success inquire pkb from sepulsa """
 
     sepulsa_response = generate_sepulsa_response("INQUIRE_PKB")
 

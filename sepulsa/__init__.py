@@ -13,7 +13,8 @@ def build_client(base_url, username, password):
     request = SepulsaRequest(username, password)
     response = SepulsaResponse()
     remote_call = RemoteCall()
-    client = SepulsaProvider(
-        base_url=base_url, request=request, response=response, remote_call=remote_call
-    )
+    client = SepulsaProvider(base_url=base_url,
+                             request=request,
+                             response=response,
+                             remote_call=remote_call)
     return client

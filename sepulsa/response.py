@@ -55,7 +55,8 @@ class SepulsaResponse(HTTPResponse):
             status_code = response["response_code"]
             # accepted code only 00 or 10
             if status_code not in ["00", "10"]:
-                raise ResponseError("STATUS_FAILED", original_exception=response)
+                raise ResponseError("STATUS_FAILED",
+                                    original_exception=response)
         return response
 
     @staticmethod
@@ -98,7 +99,8 @@ class SepulsaResponse(HTTPResponse):
         if any(key in pagination for key in response):
             for key in response:
                 if key not in skipped:
-                    response[key] = self._extract_query_params_from_url(response[key])
+                    response[key] = self._extract_query_params_from_url(
+                        response[key])
         return response
 
     def validate_status_code(self):

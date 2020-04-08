@@ -4,6 +4,8 @@
     Full reference:
     https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/introduction
 """
+from uuid import uuid4
+
 from sepulsa.core.provider import BaseProvider
 from sepulsa.urls import URLS
 
@@ -35,9 +37,9 @@ class SepulsaProvider(BaseProvider):
 
             Parameters:
                 product_type : (optional) string
-                    Can be mobile, electricity, electricity_postpaid,
-                    bpjs_kesehatan, game, multi, telkom_postpaid, pdam, tv_cable,
-                    mobile_postpaid, tv_cable, mobile_postpaid, ewallet, zakat,
+                    Can be mobile, electricity, electricity_POSTpaid,
+                    bpjs_kesehatan, game, multi, telkom_POSTpaid, pdam, tv_cable,
+                    mobile_POSTpaid, tv_cable, mobile_POSTpaid, ewallet, zakat,
                     infaq, waqaf, qurban, residential, paytv_prepaid, education,
                     education_voucher, gold_voucher, streaming_service_voucher or
                     credit_card
@@ -75,7 +77,7 @@ class SepulsaProvider(BaseProvider):
             "api_name": "PRODUCTS",
             "method": "GET",
             "query_params": {
-                "product_type": product_type,
+                "type": product_type,
                 "operator": operator,
                 "nominal": nominal,
                 "page": page,
@@ -113,9 +115,9 @@ class SepulsaProvider(BaseProvider):
 
             Parameters:
                 product_type : (optional) string
-                    mobile, electricity, electricity_postpaid,
-                    bpjs_kesehatan, game, multi, telkom_postpaid, pdam, tv_cable,
-                    mobile_postpaid, tv_cable, mobile_postpaid, ewallet, zakat,
+                    mobile, electricity, electricity_POSTpaid,
+                    bpjs_kesehatan, game, multi, telkom_POSTpaid, pdam, tv_cable,
+                    mobile_POSTpaid, tv_cable, mobile_POSTpaid, ewallet, zakat,
                     infaq, waqaf, qurban, residential, paytv_prepaid, education,
                     education_voucher, gold_voucher, streaming_service_voucher or
                     credit_card
@@ -302,7 +304,7 @@ class SepulsaProvider(BaseProvider):
 
         """
         payload = {
-            "api_name": "INQUIRE_BPJS_KESEHATAN",
+            "api_name": "BPJS_KESEHATAN",
             "method": "POST",
             "payload": {
                 "customer_number": customer_number,
@@ -325,7 +327,7 @@ class SepulsaProvider(BaseProvider):
         """
         payload = {
             "api_name": "INQUIRE_PLN_PREPAID",
-            "method": "post",
+            "method": "POST",
             "payload": {
                 "customer_number": customer_number,
                 "product_id": product_id
@@ -352,11 +354,11 @@ class SepulsaProvider(BaseProvider):
         """
         payload = {
             "api_name": "PLN_PREPAID",
-            "method": "post",
+            "method": "POST",
             "payload": {
                 "customer_number": customer_number,
                 "product_id": product_id,
-                "pln_meter_no": pln_meter_no,
+                "meter_number": pln_meter_no,
                 "order_id": order_id
             },
         }
@@ -365,7 +367,7 @@ class SepulsaProvider(BaseProvider):
 
     def inquire_pln_postpaid(self, customer_number, product_id):
         """
-           inquire pln postpaid
+           inquire pln POSTpaid
 
             parameters:
                 customer_number: (required) string
@@ -374,7 +376,7 @@ class SepulsaProvider(BaseProvider):
         """
         payload = {
             "api_name": "INQUIRE_PLN_POSTPAID",
-            "method": "post",
+            "method": "POST",
             "payload": {
                 "customer_number": customer_number,
                 "product_id": product_id
@@ -386,7 +388,7 @@ class SepulsaProvider(BaseProvider):
     def create_pln_postpaid_transaction(self, customer_number, product_id,
                                         order_id):
         """
-           create pln postpaid
+           create pln POSTpaid
 
             parameters:
                 customer_number: (required) string
@@ -398,7 +400,155 @@ class SepulsaProvider(BaseProvider):
         """
         payload = {
             "api_name": "PLN_PREPAID",
-            "method": "post",
+            "method": "POST",
+            "payload": {
+                "customer_number": customer_number,
+                "product_id": product_id,
+                "order_id": order_id
+            },
+        }
+        response = self.execute(**payload)
+        return response
+
+    def inquire_telkom_bill(self, customer_number, product_id):
+        """
+            inquire telkom bill
+
+            parameters:
+                customer_number: (required) string
+                    telkom customer number
+                product_id: (rquired) string
+
+        """
+        payload = {
+            "api_name": "INQUIRE_TELKOM",
+            "method": "POST",
+            "payload": {
+                "customer_number": customer_number,
+                "product_id": product_id
+            },
+        }
+        response = self.execute(**payload)
+        return response
+
+    def create_telkom_bill_transaction(self, customer_number, product_id,
+                                       order_id):
+        """
+            create telkom bill
+            parameters:
+                customer_number: (required) string
+                    telkom customer number
+                product_id: (rquired) string
+                order_id: (required) string
+
+        """
+        payload = {
+            "api_name": "TELKOM",
+            "method": "POST",
+            "payload": {
+                "customer_number": customer_number,
+                "product_id": product_id,
+                "order_id": order_id
+            },
+        }
+        response = self.execute(**payload)
+        return response
+
+    def get_pdam_operators(self, product_id):
+        """
+            get pdam operators
+            parameters:
+                product_id: (rquired) string
+        """
+        payload = {
+            "api_name": "PDAM_OPERATOR",
+            "method": "POST",
+            "payload": {
+                "product_id": product_id
+            }
+        }
+        response = self.execute(**payload)
+        return response
+
+    def inquire_pdam_bill(self, customer_number, product_id, operator_code):
+        """
+            inquire pdam bill
+            parameters:
+                customer_number: (required) string
+                    pdam customer number
+                product_id: (rquired) string
+                operator_code: (required) string
+
+        """
+        payload = {
+            "api_name": "INQUIRE_PDAM",
+            "method": "POST",
+            "payload": {
+                "customer_number": customer_number,
+                "product_id": product_id,
+                "operator_code": operator_code
+            },
+        }
+        response = self.execute(**payload)
+        return response
+
+    def create_pdam_bill_transaction(self, customer_number, product_id,
+                                     operator_code, order_id):
+        """
+            create pdam bill transaction
+            parameters:
+                customer_number: (required) string
+                    pdam customer number
+                product_id: (rquired) string
+                operator_code: (required) string
+                order_id: (required) string
+
+        """
+        payload = {
+            "api_name": "PDAM",
+            "method": "POST",
+            "payload": {
+                "customer_number": customer_number,
+                "product_id": product_id,
+                "operator_code": operator_code,
+                "order_id": order_id
+            },
+        }
+        response = self.execute(**payload)
+        return response
+
+    def inquire_mobile_postpaid(self, customer_number, product_id):
+        """
+            inquire mobile postpaid
+            parameters:
+                customer_number: (required) string
+                product_id: (rquired) string
+
+        """
+        payload = {
+            "api_name": "INQUIRE_MOBILE_POSTPAID",
+            "method": "POST",
+            "payload": {
+                "customer_number": customer_number,
+                "product_id": product_id
+            },
+        }
+        response = self.execute(**payload)
+        return response
+
+    def create_mobile_postpaid_transaction(self, customer_number, product_id,
+                                           order_id):
+        """
+            inquire mobile postpaid
+            parameters:
+                customer_number: (required) string
+                product_id: (rquired) string
+                order_id: (rquired) string
+
+        """
+        payload = {
+            "api_name": "MOBILE_POSTPAID",
+            "method": "POST",
             "payload": {
                 "customer_number": customer_number,
                 "product_id": product_id,

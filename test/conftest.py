@@ -101,6 +101,32 @@ def assert_list():
 
 
 @pytest.fixture
+def assert_product_item():
+
+    def _assert_product_item(products):
+        for product in products:
+            assert product["product_id"]
+            assert product["type"]
+            assert product["label"]
+
+            if product["operator"] == "":
+                assert product["operator"] == ""
+            else:
+                assert product["operator"]
+
+            assert product["nominal"]
+            assert product["price"]
+            assert product["enabled"]
+
+            if "field_denom" in product:
+                assert product["field_denom"]
+            if "field_paket_data" in product:
+                assert product["field_paket_data"] is product["field_paket_data"]
+
+    return _assert_product_item
+
+
+@pytest.fixture
 def assert_transaction_details():
 
     def _assert_transaction_details(response, data_details=None):
@@ -153,7 +179,7 @@ def assert_transaction_details():
 def assert_bpjs_kesehatan():
 
     def _assert_bpjs_kesehatan(response):
-        assert response["trx_type"]
+        assert response["trx_type"] == ""
         assert response["product_type"]
         assert response["stan"]
         assert response["premi"]
@@ -219,7 +245,9 @@ def assert_create_transaction():
         assert response["order_id"]
         assert response["price"]
         assert response["status"]
-        assert response["serial_number"] == ""
+
+        assert response["serial_number"] == response["serial_number"]
+
         assert response["amount"]
         assert response["product_id"]
         assert response["product_id"]["product_id"]
@@ -227,14 +255,15 @@ def assert_create_transaction():
         assert response["product_id"]["label"]
         assert response["product_id"]["operator"]
         assert response["product_id"]["nominal"]
-        assert response["product_id"]["price"]
+        assert response["product_id"]["price"] == response["product_id"][
+            "price"]
         assert response["product_id"]["enabled"]
 
         if "payment_period" in response:
             assert response["payment_period"]
 
         if "data" in response:
-            assert response["data"] == ""
+            assert response["data"] == response["data"]
 
         if "operator_code" in response:
             assert response["operator_code"]
@@ -510,7 +539,7 @@ def assert_pkb_details():
 def assert_inquire_pln_prepaid():
 
     def _assert_inquire_pln_prepaid(response):
-        assert response["admin_charge"] == 0
+        assert response["admin_charge"]
         assert response["trx_id"] == ""
         assert response["stan"]
         assert response["datetime"]
@@ -535,11 +564,13 @@ def assert_inquire_pln_prepaid():
 
     return _assert_inquire_pln_prepaid
 
+
 @pytest.fixture
 def assert_inquire_pln_postpaid():
+
     def _assert_inquire_pln_postpaid(response):
-        assert response["amount"] == "136856"
-        assert response["admin_charge"] == "1600"
+        assert response["amount"]
+        assert response["admin_charge"]
         assert response["trx_id"] == ""
         assert response["stan"]
         assert response["datetime"]
@@ -560,3 +591,73 @@ def assert_inquire_pln_postpaid():
         assert response["bills"]
 
     return _assert_inquire_pln_postpaid
+
+
+@pytest.fixture
+def assert_inquire_telkom_bill():
+
+    def _assert_inquire_telkom_bill(response):
+        assert response["trx_id"] == ""
+        assert response["stan"]
+        assert response["datetime"]
+        assert response["code"] == ""
+        assert response["rc"]
+        assert response["product_type"]
+        assert response["produk"]
+        assert response["request_type"]
+        assert response["id_pelanggan"]
+        assert response["nama_pelanggan"]
+        assert response["no_reference"]
+        assert response["bulan_thn"]
+        assert response["jumlah_tagihan"]
+        assert response["jumlah_adm"]
+        assert response["jumlah_bayar"]
+        assert response["description"]
+        assert response["status"] is True
+
+    return _assert_inquire_telkom_bill
+
+
+@pytest.fixture
+def assert_pdam_operators():
+
+    def _assert_pdam_operators(response):
+        assert response["OperatorLists"]
+        assert response["OperatorLists"][0]["code"]
+        assert response["OperatorLists"][0]["description"]
+
+    return _assert_pdam_operators
+
+
+@pytest.fixture
+def assert_inquire_pdam():
+
+    def _assert_inquire_pdam(response):
+        assert response["trx_id"] == ""
+        assert response["stan"]
+        assert response["amount"]
+        assert response["merchant_code"]
+        assert response["rc"]
+        assert response["admin_charge"]
+        assert response["local_trx_time"]
+        assert response["local_trx_date"]
+        assert response["settlement_date"]
+        assert response["acquiring_institution_id"]
+        assert response["retrieval_ref_no"]
+        assert response["idpel"]
+        assert response["blth"]
+        assert response["name"]
+        assert response["customer_address"]
+        assert response["group_code"]
+        assert response["group_desc"]
+        assert response["bill_count"]
+        assert response["bill_repeat_count"]
+        assert response["rp_tag"]
+        assert response["bills"]
+        assert response["mti"]
+        assert response["pan"] == ""
+        assert response["processing_code"] == ""
+        assert response["transmission_datetime"]
+        assert response["status"] is True
+
+    return _assert_inquire_pdam

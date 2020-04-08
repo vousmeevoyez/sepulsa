@@ -8,6 +8,7 @@ from sepulsa.core.exceptions import FetchError
 
 
 class RemoteCall:
+
     def __init__(self, debug=False):
         self.debug = debug
 

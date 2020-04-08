@@ -91,28 +91,30 @@ SEPULSA_RESPONSE = {
         "data": {}
     },
     "MOBILE_PREPAID": {
-        "transaction_id": "1",
+        "transaction_id": "80103",
         "type": "mobile",
-        "created": "1473332820",
-        "changed": "1473332820",
-        "customer_number": "08123456789",
-        "order_id": "ORDER-001",
-        "price": "5000",
-        "status": "pending",
-        "response_code": "10",
-        "serial_number": "",
-        "amount": "0",
+        "created": "1586319738",
+        "changed": "1586319738",
+        "customer_number": "081234567890",
         "product_id": {
             "product_id": "99",
             "type": "mobile",
-            "label": "Telkomsel Rp 100.000",
-            "operator": "telkomsel",
+            "label": "XL Rp 100.000",
+            "operator": "xl",
             "nominal": "100000",
-            "price": 99500,
+            "price": 100000,
             "enabled": "1",
             "field_denom": "100000.00",
-            "field_paket_data": True
-        }
+            "field_paket_data": False
+        },
+        "order_id": "12a9b243-752f-4abf-bf78-45b97f66dc23",
+        "price": "100000",
+        "status": "pending",
+        "response_code": "10",
+        "serial_number": None,
+        "amount": "100000",
+        "token": None,
+        "data": None
     },
     "XL_SUBSCRIBER": {
         "code": "PS",
@@ -121,7 +123,7 @@ SEPULSA_RESPONSE = {
         "end_cycle_date": "2020-01-31",
     },
     "INQUIRE_BPJS_KESEHATAN": {
-        "trx_type": "2100",
+        "trx_type": "",
         "product_type": "BPJS-KESEHATAN",
         "stan": "90518024",
         "premi": "51000",
@@ -244,29 +246,30 @@ SEPULSA_RESPONSE = {
         },
     },
     "INQUIRE_PLN_PREPAID": {
-        "admin_charge": 0,
+        "admin_charge": 2500,
         "trx_id": "",
-        "stan": "000090537391",
-        "datetime": "20170125145729",
-        "merchant_code": "6021",
-        "bank_code": "4510017",
+        "stan": "68209266",
+        "datetime": "20200408123637",
         "terminal_id": "0000000000006649",
         "material_number": "86011735718",
-        "subscriber_id": "547104409005",
-        "pln_refno": "9507B7C92E384941B76B1747B8907E18",
-        "switcher_refno": "0SYM2154710201701251442381375420",
-        "subscriber_name": "SEPULSAWATI",
+        "subscriber_id": "01428800700",
+        "pln_refno": "E935PGY497Y1JIDX51BPBXXZ9174A1FB",
+        "switcher_refno": "EH9A2J0GE08B9BIHXVE552SD4WARR67Z",
+        "subscriber_name": "WISHNU EKA SIDHARTA",
         "subscriber_segmentation": "R1",
         "power": 1300,
         "distribution_code": "54",
         "service_unit": "54710",
         "service_unit_phone": "123",
+        "max_kwh_unit": "52.1",
         "total_repeat": "0",
-        "response_code": "00",
-        "status": True,
-        "max_kwh_unit": "00936",
         "power_purchase_unsold": "50000",
         "power_purchase_unsold2": "100000",
+        "merchant_code": "6021",
+        "bank_code": "4510017",
+        "rc": "0000",
+        "status": True,
+        "response_code": "00"
     },
     "PLN_PREPAID": {
         "transaction_id": "1",
@@ -618,52 +621,60 @@ SEPULSA_RESPONSE = {
             "status": "S",
         },
     },
+    "PDAM_OPERATOR": {
+        "OperatorLists": [{
+            "code": "pdam_aetra",
+            "description": "PDAM Aetra"
+        }]
+    },
     "INQUIRE_PDAM": {
-        "trx_id":
-            "",
         "stan":
-            "000135739333",
+            "2176948158314808",
         "amount":
             "59500",
+        "transmission_datetime":
+            "1586350182",
         "merchant_code":
-            "6012",
-        "rc":
-            "00",
+            "6021",
+        "local_trx_time":
+            "124942",
+        "local_trx_date":
+            "20200408",
+        "acquiring_institution_id":
+            "000",
         "admin_charge":
             "0",
-        "local_trx_time":
-            "124926",
-        "local_trx_date":
-            "20170201",
+        "mti":
+            "0210",
+        "pan":
+            "",
+        "processing_code":
+            "",
         "settlement_date":
-            "20170202",
-        "acquiring_institution_id":
-            "008",
+            "20200409",
         "retrieval_ref_no":
-            "000000115034",
-        "idpel":
-            "1998900001",
+            "2176948158314808",
         "blth":
-            "201709201709",
+            "202004202004",
         "name":
-            "SEPULSA",
-        "customer_address":
-            "Jl. Setia Budi Tengah No.37, Kuningan, Jakarta Selatan",
-        "group_code":
-            "RB1",
-        "group_desc":
-            "RUMAH TANGGA B 1",
+            "WISHNU EKA SIDHARTA",
         "bill_count":
             "1",
         "bill_repeat_count":
             "1",
         "rp_tag":
             "59500",
+        "customer_address":
+            "Jl. Setia Budi Tengah No.37, Kuningan, Jakarta Selatan",
+        "group_code":
+            "RB1",
+        "group_desc":
+            "RUMAH TANGGA B 1",
         "bills": [{
-            "bill_amount": ["59500"],
-            "bill_date": ["201709"],
-            "kubikasi": ["527-555"],
+            "bill_date": ["202004"],
+            "kubikasi": ["699-727"],
             "penalty": ["0"],
+            "bill_amount": ["59500"],
             "waterusage_bill": "41000",
             "total_fee": "18500",
             "detail_fee": {
@@ -679,7 +690,7 @@ SEPULSA_RESPONSE = {
                 "seal_penalty": "0",
                 "lltt_fee": "0",
                 "gwt": "0",
-                "vat": "0",
+                "vat": "0"
             },
             "lift_usage": "0",
             "total_usage": "28",
@@ -687,22 +698,20 @@ SEPULSA_RESPONSE = {
                 "usage1": "10x1000 = 10000",
                 "usage2": "10x1500 = 15000",
                 "usage3": "8x2000 = 16000",
-                "usage4": "",
+                "usage4": ""
             },
-            "info_text": "Angsuran Ke-1",
+            "info_text": "Angsuran Ke-1"
         }],
-        "mti":
-            "0210",
-        "pan":
-            "074001",
-        "processing_code":
-            "380000",
-        "transmission_datetime":
-            "1020062418",
         "status":
             True,
         "response_code":
             "00",
+        "rc":
+            "00",
+        "trx_id":
+            "",
+        "idpel":
+            "1998900001"
     },
     "PDAM": {
         "transaction_id": "1",

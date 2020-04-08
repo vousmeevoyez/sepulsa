@@ -16,12 +16,13 @@ class SepulsaRequest(HTTPRequest):
         self.password = password
 
     def setup_header(self, **config):
-        credentials = "{self.username}:{self.password}"
-        encoded_credentials = base64.b64encode(credentials.encode("utf-8"))
+        credentials = f"{self.username}:{self.password}"
+        encoded_credentials = \
+            base64.b64encode(credentials.encode("utf-8")).decode("utf-8")
 
         self._header["Content-Type"] = "application/json"
         self._header["Accept"] = "application/json"
-        self._header["Authorization"] = encoded_credentials
+        self._header["Authorization"] = "Basic {}".format(encoded_credentials)
 
     def to_representation(self):
         response = super().to_representation()

@@ -23,7 +23,7 @@ URLS = {
     "TELKOM_DETAIL": "/transaction/telkom_postpaid/{}.json",
     "PDAM_OPERATOR": "/operator/pdam.json",
     "INQUIRE_PDAM": "/inquire/pdam.json",
-    "PDAM": "/transaction/pdam/{}.json",
+    "PDAM": "/transaction/pdam.json",
     "PDAM_DETAIL": "/transaction/pdam/{}.json",
     "INQUIRE_MOBILE_POSTPAID": "/inquire/mobile_postpaid.json",
     "MOBILE_POSTPAID": "/transaction/mobile_postpaid.json",

@@ -21,3 +21,4 @@ coverage.xml
 htmlcov
 temp.py
 .vscode
+test_live_client.py

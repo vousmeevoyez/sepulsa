@@ -17,7 +17,12 @@ from sepulsa.exceptions import ProviderError
 class BaseProvider:
     """ Base Provider """
 
-    def __init__(self, request, response, remote_call, base_url=None, port=None):
+    def __init__(self,
+                 request,
+                 response,
+                 remote_call,
+                 base_url=None,
+                 port=None):
         # generate request response
         self._request_contract = request
         self._response_contract = response
@@ -50,14 +55,15 @@ class BaseProvider:
         pattern = "{}={}"
         counter = 1
         for key, value in params.items():
-            query = query + pattern.format(key, value)
-            if counter == 1:
-                query = "?" + query
+            if value is not None:
+                query = query + pattern.format(key, value)
+                if counter == 1:
+                    query = "?" + query
 
-            if counter != len(params):
-                query = query + "&"
-            # end if
-            counter += 1
+                if counter != len(params):
+                    query = query + "&"
+                # end if
+                counter += 1
         # end for
         return query
 
@@ -72,10 +78,10 @@ class BaseProvider:
         """
         final_url = url
         if self.base_url is not None:
-            final_url = self.base_url + url
+            url = self.base_url + url
             if self.port is not None:
                 # if we connect to specific port we need to add it as path to
-                final_url = self.base_url + ":" + self.port + url
+                url = self.base_url + ":" + self.port + url
 
         # add url path if available
         if url_path is not None:
@@ -97,9 +103,8 @@ class BaseProvider:
     def call(self):
         """ wrapper function to encapsulate request & response contract!"""
         try:
-            response = self._remote_call.fetch(
-                self.request_contract, self.response_contract
-            )
+            response = self._remote_call.fetch(self.request_contract,
+                                               self.response_contract)
         except FetchError as error:
             raise ProviderError(error.message, error.original_exception)
         except StatusCodeError as error:
