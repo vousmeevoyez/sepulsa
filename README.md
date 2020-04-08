@@ -6,11 +6,7 @@
 
 Unofficial Sepulsa Client using Python 
 
-**This library allows you to quickly and easily use the SendGrid Web API v3 via Python.**
-
-These library only tested for python 3.7 but it should be compatible to other python version
-please create issue or contact me if you want to test it on python2
-
+**This library allows you to quickly and easily use the Sepulsa v3 via Python.**
 reference: https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/
 
 # Table of Contents
@@ -18,8 +14,6 @@ reference: https://horven.sumpahpalapa.com/swagger/kraken/index.html#!/
 * [Installation](#installation)
 * [Quick Start](#quick-start)
 
-
-# installation
 
 ### Installation
 ```
@@ -59,9 +53,3 @@ See also the list of [contributors](https://github.com/your/project/contributors
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
